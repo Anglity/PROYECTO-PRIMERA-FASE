@@ -182,41 +182,47 @@ namespace proyecto
                             fechaMinimaProduccion = fechasExistentes.Max();
                         }
                     }
+
                     if (!stockSuficiente && productosFaltantes.Length > 0)
                     {
-                        MessageBox.Show("No hay suficiente stock para el producto final.\n" + "Producto faltante:\n" + productosFaltantes.ToString(), "Producto Final Faltante",
-                                        MessageBoxButtons.OK,
-                                        MessageBoxIcon.Information);
-
                         DateTime fechaBase = fechaMinimaProduccion != DateTime.MinValue ? fechaMinimaProduccion : DateTime.Now;
-                        DateTime fechaEstimadaParaCantidadFaltante = CalcularFechaEstimadaProduccion(nombreReceta, cantidadFaltante, fechaBase);
-                        AgregarProduccionAplazada(nombreReceta, cantidadFaltante, fechaEstimadaParaCantidadFaltante);
-                    }
 
-                    if (!stockSuficiente && ingredientesFaltantes.Length > 0)
-                    {
-                        ActualizarOAgregarProductoFaltante(ingredientesFaltantes, fechaMinimaProduccion);
-                    }
-
-                    if (stockSuficiente)
-                    {
-                        var mensajeVenta = $"Hay suficiente stock del producto '{nombreReceta}' para {cantidadDeseada} unidades. ¿Desea proceder con la venta?";
-                        var respuestaVenta = MessageBox.Show(mensajeVenta, "Confirmación de Venta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                        if (respuestaVenta == DialogResult.Yes)
+                        if (stockProductoFinal > 0)
                         {
-                            fventa formVenta = new fventa();
-                            formVenta.ShowDialog();
+                            string mensaje = $"Actualmente hay {stockProductoFinal} unidades en stock, pero faltan {cantidadFaltante} unidades para completar su pedido de {cantidadDeseada} unidades.\n" +
+                                              "¿Quieres llevarte la cantidad disponible en Stock (Sí) o esperar el pedido completo (No)?";
+                            DialogResult respuestaUsuario = MessageBox.Show(mensaje, "Confirmación de Producción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                            if (respuestaUsuario == DialogResult.Yes)
+                            {
+                                // El usuario elige llevarse lo que está disponible en stock
+                                // Reducir el stock actual por la cantidad disponible
+                                datosProducto.DisminuirStockProducto(nombreReceta, stockProductoFinal);
+
+                                // Planificar la producción de la cantidad faltante
+                                DateTime fechaEstimadaParaCantidadFaltante = CalcularFechaEstimadaProduccion(nombreReceta, cantidadFaltante, fechaBase);
+                                AgregarProduccionAplazada(nombreReceta, cantidadFaltante, fechaEstimadaParaCantidadFaltante);
+                            }
+                            else
+                            {
+                                // El usuario elige esperar el pedido completo
+                                // Planificar la producción del pedido completo sin modificar el stock actual
+                                DateTime fechaEstimadaParaPedidoCompleto = CalcularFechaEstimadaProduccion(nombreReceta, cantidadDeseada, fechaBase);
+                                AgregarProduccionAplazada(nombreReceta, cantidadDeseada, fechaEstimadaParaPedidoCompleto);
+                            }
+                        }
+                        else
+                        {
+                            string mensaje = $"No hay stock para el producto final. Faltan {cantidadFaltante} unidades.\n" +
+                                              "Se procederá a planificar la producción de la cantidad faltante.";
+                            MessageBox.Show(mensaje, "Producción Necesaria", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            DateTime fechaEstimadaParaCantidadFaltante = CalcularFechaEstimadaProduccion(nombreReceta, cantidadFaltante, fechaBase);
+                            AgregarProduccionAplazada(nombreReceta, cantidadFaltante, fechaEstimadaParaCantidadFaltante);
                         }
                     }
                 }
             }
-            else
-            {
-                MessageBox.Show("La receta seleccionada no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
-
         // Métodos auxiliares como FechaAleatoria.GenerarFechaAleatoria, AgregarOActualizarProduccionEnFechaExistente, ExtraerFechaDeItem, etc., deben estar definidos.
 
 

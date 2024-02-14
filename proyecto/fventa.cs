@@ -1,6 +1,4 @@
-﻿
-using DocumentFormat.OpenXml.Vml;
-using entidad;
+﻿using entidad;
 using negocio;
 using proyecto.modales;
 using proyecto.utlidades;
@@ -777,7 +775,7 @@ namespace proyecto
 
         }
 
-        
+
 
         private void tipodocumento2_SelectedIndexChanged_1(object sender, EventArgs e)
         {

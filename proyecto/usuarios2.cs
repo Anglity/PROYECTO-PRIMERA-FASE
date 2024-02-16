@@ -374,7 +374,39 @@ namespace proyecto
             return contrasena.ToString();
         }
 
+        private void nombreusuario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permite solo dígitos numéricos, control de teclas de retroceso, y (opcionalmente) punto decimal.
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)Keys.Back) && (e.KeyChar != '.'))
+            {
+                e.Handled = true; // Bloquea el evento de cualquier cosa que no sea número o tecla de retroceso.
+            }
 
+            // Opcional: Si quieres permitir solo un punto decimal
+            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
+            {
+                e.Handled = true; // Bloquea la entrada de un segundo punto decimal.
+            }
+
+            // Opcional: Para permitir teclas como Enter, etc., puedes agregar más condiciones aquí.
+        }
+
+        private void ncompleto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+
+            // Verifica si el caracter es un número (dígito).
+            if (char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Ignora el evento.
+            }
+            // Opcional: Permite el control de teclas de retroceso y suprimir
+            else if (e.KeyChar == (char)Keys.Back || e.KeyChar == (char)Keys.Delete)
+            {
+                e.Handled = false; // Permite el evento.
+            }
+
+        }
     }
 
 }

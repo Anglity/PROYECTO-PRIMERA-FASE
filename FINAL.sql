@@ -1,4 +1,4 @@
-CREATE DATABASE proyecto_sistema
+--CREATE DATABASE proyecto_sistema
 USE [proyecto_sistema]
 GO
 /****** Object:  UserDefinedTableType [dbo].[EDetalle_Compra]    Script Date: 22/08/2023 02:41:06 p. m. ******/
@@ -816,17 +816,8 @@ SET QUOTED_IDENTIFIER ON
 
 GO
 
-CREATE TABLE [dbo].[USUARIO](
-    [IdUsuario] [int] IDENTITY(1,1) NOT NULL,
-    [Documento] [varchar](50) NULL,
-    [NombreCompleto] [varchar](50) NULL,
-    [Correo] [varchar](50) NULL,
-    [Clave] [varchar](50) NULL,
-    [IdRol] [int] NULL,
-    [Estado] [bit] NULL,
-    [FechaRegistro] [datetime] NULL,
-    [PrimerInicioSesion] [bit] NULL,
-    [ClaveCambiada] [varchar](50) NULL, -- Asegúrate de especificar también una longitud para ClaveCambiada
+
+
 PRIMARY KEY CLUSTERED 
 (
     [IdUsuario] ASC
@@ -1984,42 +1975,58 @@ GO
 
 
 
-create PROC [dbo].[SP_REGISTRARUSUARIO](
-@Documento varchar(50),
-@NombreCompleto varchar(100),
-@Correo varchar(100),
-@Clave varchar(100),
-@IdRol int,
-@Estado bit,
-@IdUsuarioResultado int output,
-@Mensaje varchar(500) output
-)
-as
-begin
-	set @IdUsuarioResultado = 0
-	set @Mensaje = ''
+CREATE PROCEDURE [dbo].[SP_REGISTRARUSUARIO]
+    @Documento varchar(50),
+    @NombreCompleto varchar(100),
+    @Correo varchar(100),
+    @Clave varchar(100),
+    @IdRol int,
+    @Estado bit,
+    -- Agregar los nuevos parámetros (opcional para ClaveCambiada si siempre será null al crear)
+    @PrimerInicioSesion bit = 1, -- Valor predeterminado true ya que es nuevo usuario
+    -- @ClaveCambiada varchar(100) = null, -- Omitido si no lo usas al registrar
+    @IdUsuarioResultado int OUTPUT,
+    @Mensaje varchar(500) OUTPUT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SET @IdUsuarioResultado = 0;
+    SET @Mensaje = '';
 
+    IF NOT EXISTS (SELECT * FROM USUARIO WHERE Documento = @Documento)
+    BEGIN
+        INSERT INTO usuario (
+            Documento,
+            NombreCompleto,
+            Correo,
+            Clave,
+            IdRol,
+            Estado,
+            PrimerInicioSesion
+            -- ,ClaveCambiada -- Omitido si siempre es null al inicio
+        ) VALUES (
+            @Documento,
+            @NombreCompleto,
+            @Correo,
+            @Clave,
+            @IdRol,
+            @Estado,
+            @PrimerInicioSesion
+            -- ,@ClaveCambiada -- Omitido si siempre es null al inicio
+        );
 
-	if not exists(select * from USUARIO where Documento = @Documento)
-	begin
-		insert into usuario(Documento,NombreCompleto,Correo,Clave,IdRol,Estado) values
-		(@Documento,@NombreCompleto,@Correo,@Clave,@IdRol,@Estado)
-
-		set @IdUsuarioResultado = SCOPE_IDENTITY()
-		
-	end
-	else
-		set @Mensaje = 'No se puede repetir el documento para más de un usuario'
-
-
-end
-
+        SET @IdUsuarioResultado = SCOPE_IDENTITY();
+    END
+    ELSE
+    BEGIN
+        SET @Mensaje = 'No se puede repetir el documento para más de un usuario';
+    END
+END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_ReporteCompras]    Script Date: 22/08/2023 02:41:07 p. m. ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
+
+
+
 
 
 CREATE PROCEDURE [dbo].[sp_ReporteCompras] (
@@ -2442,6 +2449,64 @@ END
 
 
 
+
+delete from DETALLE_VENTA
+
+
+
+
+DECLARE @mes INT = 1;
+DECLARE @dia INT;
+DECLARE @anio INT = 2024; -- Ajustado para el año 2020
+DECLARE @cantidad INT;
+DECLARE @precioVenta DECIMAL(10, 2);
+DECLARE @subTotal DECIMAL(10, 2);
+DECLARE @itbis DECIMAL(10, 2) = 18; -- Suponiendo un ITBIS del 18%
+DECLARE @valorTotal DECIMAL(10, 2);
+DECLARE @idProducto INT; -- Variable para el ID de producto
+DECLARE @diasMes INT;
+
+WHILE @mes <= 12
+BEGIN
+    -- Determinar la cantidad de días en el mes
+    IF @mes IN (1, 3, 5, 7, 8, 10, 12)
+        SET @diasMes = 31;
+    ELSE IF @mes IN (4, 6, 9, 11)
+        SET @diasMes = 30;
+    ELSE IF (@mes = 2 AND ((@anio % 4 = 0 AND @anio % 100 != 0) OR (@anio % 400 = 0)))
+        SET @diasMes = 29; -- Febrero en año bisiesto
+    ELSE
+        SET @diasMes = 28; -- Febrero en año no bisiesto
+
+    SET @dia = 1;
+    WHILE @dia <= @diasMes
+    BEGIN
+        SET @cantidad = ROUND((RAND() * 15) + 5, 0); -- Cantidades ajustadas entre 5 y 20
+        SET @precioVenta = ROUND((RAND() * 150) + 100, 2); -- Precio ajustado entre 100 y 250
+        SET @subTotal = @precioVenta * @cantidad;
+        SET @valorTotal = @subTotal + (@subTotal * @itbis / 100);
+
+        -- Asegúrate de tener un rango válido de IDs de productos
+        SET @idProducto = ROUND((RAND() * ((SELECT MAX(IdProducto) FROM PRODUCTO) - (SELECT MIN(IdProducto) FROM PRODUCTO)) + (SELECT MIN(IdProducto) FROM PRODUCTO)), 0);
+
+        INSERT INTO DETALLE_VENTA(IdVenta, IdProducto, PrecioVenta, Cantidad, SubTotal, itbis, Valortotal, UnidadesMedida, Galones_a_Litro, Bloque_a_Libra, FechaRegistro)
+        VALUES ((SELECT TOP 1 IdVenta FROM VENTA ORDER BY NEWID()), -- Selecciona un IdVenta aleatorio
+                @idProducto,
+                @precioVenta,
+                @cantidad,
+                @subTotal,
+                @itbis,
+                @valorTotal,
+                'Unidades', -- Asumiendo 'Unidades' como ejemplo de unidad de medida
+                0, -- Ejemplo de Galones a Litro como cero
+                0, -- Ejemplo de Bloque a Libra como cero
+                DATEFROMPARTS(@anio, @mes, @dia)
+               );
+
+        SET @dia = @dia + 1;
+    END;
+    SET @mes = @mes + 1;
+END;
 
 
 

@@ -36,6 +36,23 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(proveedores));
             this.dgdata = new System.Windows.Forms.DataGridView();
+            this.btnseleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RazonSocial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Correo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdDireccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pais = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Provincia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ciudad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sector = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Calle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CodigoPostal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiasEntrega = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EstadoValor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label12 = new System.Windows.Forms.Label();
             this.busquedacombo = new System.Windows.Forms.ComboBox();
             this.btnlimpiarbuscador = new FontAwesome.Sharp.IconButton();
@@ -75,23 +92,6 @@
             this.iddireciontxt = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.diaentrega = new System.Windows.Forms.TextBox();
-            this.btnseleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RazonSocial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Correo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IdDireccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pais = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Provincia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ciudad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sector = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Calle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CodigoPostal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DiasEntrega = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EstadoValor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgdata)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -166,6 +166,157 @@
             this.dgdata.TabIndex = 135;
             this.dgdata.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgdata_CellContentClick);
             this.dgdata.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgdata_CellPainting);
+            // 
+            // btnseleccionar
+            // 
+            this.btnseleccionar.HeaderText = "";
+            this.btnseleccionar.MinimumWidth = 12;
+            this.btnseleccionar.Name = "btnseleccionar";
+            this.btnseleccionar.ReadOnly = true;
+            this.btnseleccionar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.btnseleccionar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.btnseleccionar.Width = 50;
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.MinimumWidth = 12;
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
+            this.Id.Width = 50;
+            // 
+            // Documento
+            // 
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Documento.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Documento.FillWeight = 150F;
+            this.Documento.HeaderText = "No Documento";
+            this.Documento.MinimumWidth = 20;
+            this.Documento.Name = "Documento";
+            this.Documento.ReadOnly = true;
+            this.Documento.Width = 200;
+            // 
+            // RazonSocial
+            // 
+            this.RazonSocial.HeaderText = "Razon Social";
+            this.RazonSocial.MinimumWidth = 12;
+            this.RazonSocial.Name = "RazonSocial";
+            this.RazonSocial.ReadOnly = true;
+            this.RazonSocial.Width = 200;
+            // 
+            // Correo
+            // 
+            this.Correo.HeaderText = "Correo";
+            this.Correo.MinimumWidth = 12;
+            this.Correo.Name = "Correo";
+            this.Correo.ReadOnly = true;
+            this.Correo.Width = 200;
+            // 
+            // Telefono
+            // 
+            this.Telefono.HeaderText = "Telefono";
+            this.Telefono.MinimumWidth = 12;
+            this.Telefono.Name = "Telefono";
+            this.Telefono.ReadOnly = true;
+            this.Telefono.Width = 200;
+            // 
+            // IdDireccion
+            // 
+            this.IdDireccion.HeaderText = "IdDireccion";
+            this.IdDireccion.MinimumWidth = 6;
+            this.IdDireccion.Name = "IdDireccion";
+            this.IdDireccion.ReadOnly = true;
+            this.IdDireccion.Visible = false;
+            this.IdDireccion.Width = 125;
+            // 
+            // Pais
+            // 
+            this.Pais.HeaderText = "Pais";
+            this.Pais.MinimumWidth = 6;
+            this.Pais.Name = "Pais";
+            this.Pais.ReadOnly = true;
+            this.Pais.Visible = false;
+            this.Pais.Width = 125;
+            // 
+            // Provincia
+            // 
+            this.Provincia.HeaderText = "Provincia";
+            this.Provincia.MinimumWidth = 6;
+            this.Provincia.Name = "Provincia";
+            this.Provincia.ReadOnly = true;
+            this.Provincia.Visible = false;
+            this.Provincia.Width = 125;
+            // 
+            // Ciudad
+            // 
+            this.Ciudad.HeaderText = "Ciudad";
+            this.Ciudad.MinimumWidth = 6;
+            this.Ciudad.Name = "Ciudad";
+            this.Ciudad.ReadOnly = true;
+            this.Ciudad.Visible = false;
+            this.Ciudad.Width = 125;
+            // 
+            // Sector
+            // 
+            this.Sector.HeaderText = "Sector";
+            this.Sector.MinimumWidth = 6;
+            this.Sector.Name = "Sector";
+            this.Sector.ReadOnly = true;
+            this.Sector.Visible = false;
+            this.Sector.Width = 125;
+            // 
+            // Calle
+            // 
+            this.Calle.HeaderText = "Calle";
+            this.Calle.MinimumWidth = 6;
+            this.Calle.Name = "Calle";
+            this.Calle.ReadOnly = true;
+            this.Calle.Visible = false;
+            this.Calle.Width = 125;
+            // 
+            // CodigoPostal
+            // 
+            this.CodigoPostal.HeaderText = "CodigoPostal";
+            this.CodigoPostal.MinimumWidth = 6;
+            this.CodigoPostal.Name = "CodigoPostal";
+            this.CodigoPostal.ReadOnly = true;
+            this.CodigoPostal.Visible = false;
+            this.CodigoPostal.Width = 125;
+            // 
+            // Direccion
+            // 
+            this.Direccion.HeaderText = "Direccion";
+            this.Direccion.MinimumWidth = 6;
+            this.Direccion.Name = "Direccion";
+            this.Direccion.ReadOnly = true;
+            this.Direccion.Width = 400;
+            // 
+            // Estado
+            // 
+            this.Estado.HeaderText = "Estado";
+            this.Estado.MinimumWidth = 12;
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
+            this.Estado.Width = 125;
+            // 
+            // DiasEntrega
+            // 
+            this.DiasEntrega.HeaderText = "DiasEntrega";
+            this.DiasEntrega.MinimumWidth = 6;
+            this.DiasEntrega.Name = "DiasEntrega";
+            this.DiasEntrega.ReadOnly = true;
+            this.DiasEntrega.Visible = false;
+            this.DiasEntrega.Width = 125;
+            // 
+            // EstadoValor
+            // 
+            this.EstadoValor.HeaderText = "EstadoValor";
+            this.EstadoValor.MinimumWidth = 12;
+            this.EstadoValor.Name = "EstadoValor";
+            this.EstadoValor.ReadOnly = true;
+            this.EstadoValor.Visible = false;
+            this.EstadoValor.Width = 200;
             // 
             // label12
             // 
@@ -321,6 +472,7 @@
             // 
             this.estado2.BackColor = System.Drawing.SystemColors.Info;
             this.estado2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.estado2.Enabled = false;
             this.estado2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.estado2.FormattingEnabled = true;
             this.estado2.Location = new System.Drawing.Point(32, 424);
@@ -371,6 +523,7 @@
             this.txttelefono.Name = "txttelefono";
             this.txttelefono.Size = new System.Drawing.Size(399, 26);
             this.txttelefono.TabIndex = 127;
+            this.txttelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txttelefono_KeyPress);
             // 
             // label4
             // 
@@ -413,6 +566,7 @@
             this.txtdocumento.Name = "txtdocumento";
             this.txtdocumento.Size = new System.Drawing.Size(399, 26);
             this.txtdocumento.TabIndex = 121;
+            this.txtdocumento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtdocumento_KeyPress);
             // 
             // correo2
             // 
@@ -504,6 +658,7 @@
             this.codigopostaltxt.Name = "codigopostaltxt";
             this.codigopostaltxt.Size = new System.Drawing.Size(184, 26);
             this.codigopostaltxt.TabIndex = 147;
+            this.codigopostaltxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.codigopostaltxt_KeyPress);
             // 
             // label11
             // 
@@ -526,6 +681,7 @@
             this.provinciatxt.Name = "provinciatxt";
             this.provinciatxt.Size = new System.Drawing.Size(184, 26);
             this.provinciatxt.TabIndex = 143;
+            this.provinciatxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.provinciatxt_KeyPress);
             // 
             // sectortxt
             // 
@@ -536,6 +692,7 @@
             this.sectortxt.Name = "sectortxt";
             this.sectortxt.Size = new System.Drawing.Size(184, 26);
             this.sectortxt.TabIndex = 145;
+            this.sectortxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sectortxt_KeyPress);
             // 
             // label1
             // 
@@ -580,6 +737,7 @@
             this.paistxt.Name = "paistxt";
             this.paistxt.Size = new System.Drawing.Size(184, 26);
             this.paistxt.TabIndex = 138;
+            this.paistxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.paistxt_KeyPress);
             // 
             // label7
             // 
@@ -602,6 +760,7 @@
             this.ciudadtxt.Name = "ciudadtxt";
             this.ciudadtxt.Size = new System.Drawing.Size(184, 26);
             this.ciudadtxt.TabIndex = 140;
+            this.ciudadtxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ciudadtxt_KeyPress);
             // 
             // iddireciontxt
             // 
@@ -635,157 +794,7 @@
             this.diaentrega.Name = "diaentrega";
             this.diaentrega.Size = new System.Drawing.Size(184, 26);
             this.diaentrega.TabIndex = 151;
-            // 
-            // btnseleccionar
-            // 
-            this.btnseleccionar.HeaderText = "";
-            this.btnseleccionar.MinimumWidth = 12;
-            this.btnseleccionar.Name = "btnseleccionar";
-            this.btnseleccionar.ReadOnly = true;
-            this.btnseleccionar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.btnseleccionar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.btnseleccionar.Width = 50;
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.MinimumWidth = 12;
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Visible = false;
-            this.Id.Width = 50;
-            // 
-            // Documento
-            // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Documento.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Documento.FillWeight = 150F;
-            this.Documento.HeaderText = "No Documento";
-            this.Documento.MinimumWidth = 20;
-            this.Documento.Name = "Documento";
-            this.Documento.ReadOnly = true;
-            this.Documento.Width = 200;
-            // 
-            // RazonSocial
-            // 
-            this.RazonSocial.HeaderText = "Razon Social";
-            this.RazonSocial.MinimumWidth = 12;
-            this.RazonSocial.Name = "RazonSocial";
-            this.RazonSocial.ReadOnly = true;
-            this.RazonSocial.Width = 200;
-            // 
-            // Correo
-            // 
-            this.Correo.HeaderText = "Correo";
-            this.Correo.MinimumWidth = 12;
-            this.Correo.Name = "Correo";
-            this.Correo.ReadOnly = true;
-            this.Correo.Width = 200;
-            // 
-            // Telefono
-            // 
-            this.Telefono.HeaderText = "Telefono";
-            this.Telefono.MinimumWidth = 12;
-            this.Telefono.Name = "Telefono";
-            this.Telefono.ReadOnly = true;
-            this.Telefono.Width = 200;
-            // 
-            // IdDireccion
-            // 
-            this.IdDireccion.HeaderText = "IdDireccion";
-            this.IdDireccion.MinimumWidth = 6;
-            this.IdDireccion.Name = "IdDireccion";
-            this.IdDireccion.ReadOnly = true;
-            this.IdDireccion.Visible = false;
-            this.IdDireccion.Width = 125;
-            // 
-            // Pais
-            // 
-            this.Pais.HeaderText = "Pais";
-            this.Pais.MinimumWidth = 6;
-            this.Pais.Name = "Pais";
-            this.Pais.ReadOnly = true;
-            this.Pais.Visible = false;
-            this.Pais.Width = 125;
-            // 
-            // Provincia
-            // 
-            this.Provincia.HeaderText = "Provincia";
-            this.Provincia.MinimumWidth = 6;
-            this.Provincia.Name = "Provincia";
-            this.Provincia.ReadOnly = true;
-            this.Provincia.Visible = false;
-            this.Provincia.Width = 125;
-            // 
-            // Ciudad
-            // 
-            this.Ciudad.HeaderText = "Ciudad";
-            this.Ciudad.MinimumWidth = 6;
-            this.Ciudad.Name = "Ciudad";
-            this.Ciudad.ReadOnly = true;
-            this.Ciudad.Visible = false;
-            this.Ciudad.Width = 125;
-            // 
-            // Sector
-            // 
-            this.Sector.HeaderText = "Sector";
-            this.Sector.MinimumWidth = 6;
-            this.Sector.Name = "Sector";
-            this.Sector.ReadOnly = true;
-            this.Sector.Visible = false;
-            this.Sector.Width = 125;
-            // 
-            // Calle
-            // 
-            this.Calle.HeaderText = "Calle";
-            this.Calle.MinimumWidth = 6;
-            this.Calle.Name = "Calle";
-            this.Calle.ReadOnly = true;
-            this.Calle.Visible = false;
-            this.Calle.Width = 125;
-            // 
-            // CodigoPostal
-            // 
-            this.CodigoPostal.HeaderText = "CodigoPostal";
-            this.CodigoPostal.MinimumWidth = 6;
-            this.CodigoPostal.Name = "CodigoPostal";
-            this.CodigoPostal.ReadOnly = true;
-            this.CodigoPostal.Visible = false;
-            this.CodigoPostal.Width = 125;
-            // 
-            // Direccion
-            // 
-            this.Direccion.HeaderText = "Direccion";
-            this.Direccion.MinimumWidth = 6;
-            this.Direccion.Name = "Direccion";
-            this.Direccion.ReadOnly = true;
-            this.Direccion.Width = 400;
-            // 
-            // Estado
-            // 
-            this.Estado.HeaderText = "Estado";
-            this.Estado.MinimumWidth = 12;
-            this.Estado.Name = "Estado";
-            this.Estado.ReadOnly = true;
-            this.Estado.Width = 125;
-            // 
-            // DiasEntrega
-            // 
-            this.DiasEntrega.HeaderText = "DiasEntrega";
-            this.DiasEntrega.MinimumWidth = 6;
-            this.DiasEntrega.Name = "DiasEntrega";
-            this.DiasEntrega.ReadOnly = true;
-            this.DiasEntrega.Visible = false;
-            this.DiasEntrega.Width = 125;
-            // 
-            // EstadoValor
-            // 
-            this.EstadoValor.HeaderText = "EstadoValor";
-            this.EstadoValor.MinimumWidth = 12;
-            this.EstadoValor.Name = "EstadoValor";
-            this.EstadoValor.ReadOnly = true;
-            this.EstadoValor.Visible = false;
-            this.EstadoValor.Width = 200;
+            this.diaentrega.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.diaentrega_KeyPress);
             // 
             // proveedores
             // 

@@ -105,6 +105,7 @@
             this.nombreusuario.Size = new System.Drawing.Size(399, 26);
             this.nombreusuario.TabIndex = 46;
             this.nombreusuario.TextChanged += new System.EventHandler(this.nombreusuario_TextChanged);
+            this.nombreusuario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nombreusuario_KeyPress);
             // 
             // ncompleto
             // 
@@ -115,6 +116,7 @@
             this.ncompleto.Name = "ncompleto";
             this.ncompleto.Size = new System.Drawing.Size(399, 26);
             this.ncompleto.TabIndex = 48;
+            this.ncompleto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ncompleto_KeyPress);
             // 
             // label3
             // 
@@ -146,7 +148,7 @@
             this.label4.Location = new System.Drawing.Point(44, 320);
             this.label4.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(74, 31);
+            this.label4.Size = new System.Drawing.Size(94, 31);
             this.label4.TabIndex = 49;
             this.label4.Text = "Correo";
             // 
@@ -170,9 +172,9 @@
             this.label5.Location = new System.Drawing.Point(43, 404);
             this.label5.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(192, 31);
+            this.label5.Size = new System.Drawing.Size(255, 31);
             this.label5.TabIndex = 51;
-            this.label5.Text = "Contraseña";
+            this.label5.Text = "Contraseña ( no escriba)";
             // 
             // confirmar
             // 
